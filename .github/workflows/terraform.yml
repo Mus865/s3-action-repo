@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   terraform: 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
         AWS_ACCESS_KEY_ID: ${{secrets.ACCESS_KEY}}
         AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_KEY}}
@@ -15,7 +15,7 @@ jobs:
         terraform_version: 1.1.9
     - name: init
       run: |
-          eval `ssh agent -s`
+          eval "ssh agent -s"
           ssh-add -<<< '${{secrets.SSH_KEY_GITHUB_ACTIONS}}'
           terraform init
     - name: validate
